@@ -26,11 +26,50 @@ object Expressions extends App {
 
   def fib (n: Int): Int = {
     if(n <=1) 1
-    else if(n==2) 1
     else fib(n-1) + fib(n-2)
   }
   println (fib(6))
+
   def isPrime(n: Int) : Boolean = {
-    
+    def isPrimeUntil(t: Int) : Boolean = {
+      if(t<=1) true
+      else n%t != 0 && isPrimeUntil(t-1)
+    }
+    isPrimeUntil(n/2)
   }
+
+  println(isPrime(6))
+
+  def stringConcat(s: String, n: Int): String ={
+    def concatHelper(n: Int, acc: String): String ={
+      if(n<=0) acc
+      else concatHelper(n-1, acc+s)
+    }
+    concatHelper(n, "")
+  }
+  println (stringConcat("Titi", 5))
+
+
+  def isPrimeRec(n: Int): Boolean = {
+    def isPrimeTailRec(t: Int, isStillPrime: Boolean): Boolean ={
+      if(! isStillPrime) false
+      else if(t<= 1) true
+      else isPrimeTailRec(t-1, n%t != 0 && isStillPrime)
+
+    }
+    isPrimeTailRec(n/2, true)
+  }
+
+  println(isPrimeRec(6))
+
+  def fibRec(n: Int): Int ={
+    def fibTailRec(t: Int, last: Int, prev: Int): Int = {
+      if (t >= n) last
+      else fibTailRec(t + 1, last + prev, last)
+    }
+    if(n<=1) 1
+    else fibTailRec(2, 1, 1)
+  }
+  println (fibRec(8))
 }
+
