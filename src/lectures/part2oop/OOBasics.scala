@@ -14,6 +14,12 @@ class Person(name: String, val age: Int) {
 
 class Writer(firstName: String, lastName: String, val yob: Int){
   def fullName() = s"@firstName @lastName"
+  def +(string: String) = {
+    new Writer(firstName.concat(string), lastName.concat(string), yob)
+  }
+  def unary_+(i: Int)= {
+    new Writer(lastName, firstName, yob+1)
+  }
 }
 class Novel(name: String, year: Int, author: Writer){
   def authorAge(): Int = year - this.author.yob
@@ -28,6 +34,9 @@ class Counter(val value: Int){
   def dec() = new Counter(this.value-1)
   def inc(amount: Int) = new Counter(this.value+amount)
   def dec(amount: Int) = new Counter(this.value-amount)
-}
 
+
+
+
+}
 //class params are NOT fields.
