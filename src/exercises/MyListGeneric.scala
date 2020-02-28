@@ -8,6 +8,9 @@ abstract class MyListGeneirc[+A] {
   def add[B>: A](element: B): MyListGeneirc[B]
   override def toString:  String = "[ "+printElements+"]"
   def printElements: String
+  def map(myTransformer: MyTransformer[T,A]) : MyListGeneirc[A]
+  def filter[B>:A](myPredicate: MyPredicate[B]) : MyListGeneirc[B]
+
 }
 
 object Empty extends MyListGeneirc[Nothing]{
@@ -34,7 +37,14 @@ class Cons[+A](h: A, t:MyListGeneirc[A]) extends MyListGeneirc[A]{
   override def printElements = s"${h} ${t.printElements}"
 }
 
+trait MyPredicate[T]{
+
+}
+trait MyTransformer[A,B]{
+
+}
+
 object ListTest extends App {
-  val list = new Cons[Int](1, new Cons(2, new Cons(3,new Empty)))
+  val list = new Cons[Int](1, new Cons(2, new Cons(3,Empty)))
   println(list.toString)
 }
